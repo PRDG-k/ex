@@ -1,22 +1,31 @@
 def avg_temp(weather_data):
     city = input("도시 이름을 입력하세요: ")
     filtered = list(filter(lambda x: x[1] == city, weather_data))
-    print(f"{city}의 평균 기온: {sum(x[2] for x in filtered) / len(filtered):.2f}°C")
+    if filtered:
+        print(f"{city}의 평균 기온: {sum(x[2] for x in filtered) / len(filtered):.2f}°C")
+    else:
+        print(f"{city}의 날씨 데이터가 없습니다.")
     print("")
 
 
 def min_and_max_temp(weather_data):
     city = input("도시 이름을 입력하세요: ")
     filtered = list(filter(lambda x: x[1] == city, weather_data))
-    print(f"{city}의 최고 기온: {max(x[2] for x in filtered):.1f}°C, 최저 기온: {min(x[2] for x in filtered):.1f}°C")
+    if filtered:
+        print(f"{city}의 최고 기온: {max(x[2] for x in filtered):.1f}°C, 최저 기온: {min(x[2] for x in filtered):.1f}°C")
+    else:
+        print(f"{city}의 날씨 데이터가 없습니다.")
     print("")
 
 
 def total_rainfall(weather_data):
     city = input("도시 이름을 입력하세요: ")
     filtered = list(filter(lambda x: x[1] == city, weather_data))
-    print(f"{city}의 총 강수량: {sum(x[3] for x in filtered):.1f}mm")
-    print(f"{city}의 강수량이 있었던 날: {sum(x[3] > 0 for x in filtered)}일")
+    if filtered:
+        print(f"{city}의 총 강수량: {sum(x[3] for x in filtered):.1f}mm")
+        print(f"{city}의 강수량이 있었던 날: {sum(x[3] > 0 for x in filtered)}일")
+    else:
+        print(f"{city}의 날씨 데이터가 없습니다.")
     print("")
 
 
