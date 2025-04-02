@@ -60,7 +60,7 @@
 # year = int(input("올해 연도를 입력하세요. "))
 # print(f"올해는 {year}, {name}님의 나이는 {year - birth + 1}세 입니다")
 
-rainbow = ["red", "orange", "yellow", "green", "blue", "navy", "purple"]
+# rainbow = ["red", "orange", "yellow", "green", "blue", "navy", "purple"]
 
 # 1
 # print(rainbow[2])
@@ -124,25 +124,163 @@ rainbow = ["red", "orange", "yellow", "green", "blue", "navy", "purple"]
 
 # print("학점:", grade)
 
-age = int(input("나이를 숫자로 입력해주세요: "))
-payment_method = input("결제방법을 입력해주세요 (현금 또는 카드): ")
-fee = 0
+# age = int(input("나이를 숫자로 입력해주세요: "))
+# payment_method = input("결제방법을 입력해주세요 (현금 또는 카드): ")
+# fee = 0
 
-if age < 8:
-    fee = 0
-elif age < 14:
-    fee = 450
-elif age < 20:
-    if payment_method == "카드":
-        fee = 720
+# if age < 8:
+#     fee = 0
+# elif age < 14:
+#     fee = 450
+# elif age < 20:
+#     if payment_method == "카드":
+#         fee = 720
+#     else:
+#         fee = 1000
+# elif age < 75:
+#     if payment_method == "카드":
+#         fee = 1200
+#     else:
+#         fee = 1300
+# else:
+#     fee = 0
+
+# print(f"{age}세의 {payment_method} 요금은 {fee}원입니다.")
+
+# calories = {"apple": 95, "banna": 105, "cherry": 50}
+# fruit = input("과일 이름을 영문으로 입력하세요: ")
+
+# if fruit in calories:
+#     print(f"{fruit}의 칼로리는 {calories[fruit]}kcal 입니다.")
+# else:
+#     print(f"{fruit}는 없는 과일입니다.")
+
+# while True:
+#     num = input("숫자를 입력하세요: ")
+#     if num.isdigit():
+#         num = int(num)
+#     else:
+#         print("숫자만 입력하세요.")
+#         continue
+
+#     if num == 0:
+#         continue
+#     elif num > 0:
+#         print(f"1부터 {num}까지의 합은 {(num * (1+num))/2}입니다.")
+#         break
+#     else:
+#         print("양수만 입력하세요.")
+
+# 1
+# num = int(input("숫자를 입력하세요: "))
+# for i in range(1, 10):
+#     print(f"{num} x {i} = {num*i}")
+
+# # 2
+# num = int(input("숫자를 입력하세요: "))
+# sum = 0
+# for i in range(1, num+1, 2):
+#     sum += i
+# print(f"1부터 {num}까지의 홀수의 합: {sum}")
+
+# 3
+# students = {
+#     "학생1": {"국어": 83, "영어": 92, "수학": 88},
+#     "학생2": {"국어": 90, "영어": 79, "수학": 86},
+#     "학생3": {"국어": 88, "영어": 86, "수학": 94},
+# }
+
+# for student, scores in students.items():
+#     avg_score = sum(scores.values()) / len(scores)
+#     print(f"{student}의 평균 점수는 {avg_score:.2f}입니다.")
+
+
+# tables = [[i * j for i in range(1, 10)] for j in range(1, 10)]
+# for i in range(1, 10):
+#     print(f"[{i}단]")
+#     for j in range(1, 10):
+#         print(f"{i} x {j} = {i*j}")
+#         # print(f"{i} x {j} = {tables[i-1][j-1]}")
+#     print()
+
+
+def check_machine(vending_machine):
+    print("남은 음료수: ", vending_machine)
+
+
+def is_drink(item, vending_machine):
+    if item in vending_machine:
+        return True
     else:
-        fee = 1000
-elif age < 75:
-    if payment_method == "카드":
-        fee = 1200
+        return False
+
+
+def add_drink(vending_machine):
+    item = input("음료를 입력하세요: ")
+    if is_drink(item, vending_machine):
+        idx = vending_machine.index(item)
+        vending_machine.insert(idx, item)
     else:
-        fee = 1300
+        vending_machine.append(item)
+    print("추가 완료")
+    check_machine(vending_machine)
+    return vending_machine
+
+
+def remove_drink(vending_machine):
+    item = input("삭제할 음료수? ")
+    if is_drink(item, vending_machine):
+        vending_machine.remove(item)
+        print("삭제 완료")
+    else:
+        print("음료가 없습니다.")
+
+    check_machine(vending_machine)
+    return vending_machine
+
+
+vending_machine = ["게토레이", "게토레이", "레쓰비", "레쓰비", "생수", "생수", "생수", "이프로"]
+isOwner = False
+
+while True:
+    print("사용자 종류를 입력하세요:")
+    print("1. 소비자")
+    print("2. 주인")
+    user = input()
+    if user.isdigit():
+        if int(user) == 1:
+            user = "소비자"
+        elif int(user) == 2:
+            user = "주인"
+
+    if user == "주인":
+        isOwner = True
+        break
+    elif user == "소비자":
+        isOwner = False
+        break
+    else:
+        print("올바른 명령을 입력하세요.")
+
+if isOwner:
+    print("할 일 선택")
+    print("1. 추가")
+    print("2. 삭제")
+    command = input()
+
+    if command.isdigit():
+        if int(command) == 1:
+            command = "추가"
+        elif int(command) == 2:
+            command = "삭제"
+
+    if command == "추가":
+        vending_machine = add_drink(vending_machine)
+    elif command == "삭제":
+        vending_machine = remove_drink(vending_machine)
+    else:
+        print("올바른 명령을 입력하세요.")
 else:
-    fee = 0
-
-print(f"{age}세의 {payment_method} 요금은 {fee}원입니다.")
+    order = input("마실 음료는?: ")
+    vending_machine = remove_drink(order)
+    print(f"{order} 나왔습니다.")
