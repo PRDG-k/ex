@@ -70,20 +70,20 @@ class HomeElectricityData(ElectricityData):
             
         print(f"{date}의 사용량이 없습니다.")
     
-    # @classmethod
+    @classmethod
+    def filter_by_date(cls, usage_date, start_date, end_date):
+        filtered = []
+        for data in usage_date:
+            if start_date <= data["date"] and data["date"] <= end_date:
+                filtered.append(data)
+        return filtered
+    
     # def filter_by_date(self, start_date, end_date):
     #     filtered = []
     #     for data in self.usage_data:
     #         if start_date <= data["date"] and data["date"] <= end_date:
     #             filtered.append(data)
     #     return filtered
-    
-    def filter_by_date(self, start_date, end_date):
-        filtered = []
-        for data in self.usage_data:
-            if start_date <= data["date"] and data["date"] <= end_date:
-                filtered.append(data)
-        return filtered
     
     @staticmethod
     def get_max_usage(usage_data):
@@ -105,5 +105,5 @@ home_electricity = HomeElectricityData(electricity_usage)
 print(home_electricity)
 home_electricity.get_usage_on_date("2024-11-03")
 home_electricity.add_usage("2024-11-06", 20)
-print(f"특정 날짜 범위 내 사용량: {home_electricity.filter_by_date("2024-11-02", "2024-11-04")}")
+print(f"특정 날짜 범위 내 사용량: {HomeElectricityData.filter_by_date(home_electricity.usage_data, "2024-11-02", "2024-11-04")}")
 print(f"가장 높은 사용량: {home_electricity.get_max_usage(home_electricity.usage_data)}")
