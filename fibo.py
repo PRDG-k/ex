@@ -83,6 +83,6 @@ def fib(n: int) -> int:
 
 if __name__ == '__main__':
     start_time = time.time()
-    print(fib(100))  # 832040
+    print(fib(10))  # 832040
     end_time = time.time()
     print("fibo 실행 시간:", end_time - start_time)
